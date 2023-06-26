@@ -19,7 +19,7 @@
             prepend-icon="mdi-newspaper"
             title="Book Management"
             style="cursor: pointer"
-            @click="goToNewsManage"
+            @click="gotoBookManagement"
           ></v-list-item>
         </v-list-group>
         <v-list-group prepend-icon="mdi-newspaper" value="Quiz Menu">
@@ -34,7 +34,7 @@
             prepend-icon="mdi-history"
             title="Book"
             style="cursor: pointer"
-            @click="goToQuizHistory"
+            @click="goToBorrowManage"
           ></v-list-item>
         </v-list-group>
       </v-list>
@@ -105,12 +105,12 @@ const goToHome = () => {
 
 const gotoBookList = () => {
   console.log('test')
-  router.push('/admin/news/list')
+  router.push('/admin/book/list')
 }
 
-const goToNewsManage = () => {
+const gotoBookManagement = () => {
   console.log('test')
-  router.push('/admin/news/manage')
+  router.push('/admin/book/manage')
 }
 
 const goToQuizHistory = () => {
@@ -118,9 +118,9 @@ const goToQuizHistory = () => {
   router.push('/admin/quiz/list')
 }
 
-const goToQuizManage = () => {
+const goToBorrowManage = () => {
   console.log('test')
-  router.push('/admin/quiz/manage')
+  router.push('/admin/booking/manage')
 }
 const handleLogOut = async () => {
   await authStore.logout()

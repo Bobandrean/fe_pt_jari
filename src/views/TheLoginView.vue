@@ -40,17 +40,21 @@ const form = reactive({
 })
 
 const handleLogin = async () => {
-  auth.login(form).then(async () => {
-    const position = await auth.fetchUsersRole()
-
-    // if (position === 'Staff') {
-    router.push('/admin')
-    // } else if (position === undefined) {
-    //   router.push('/blank') // Redirect to the login page
-    // } else {
-    //   router.push('/user')
-    // }
-  })
+  auth
+    .login(form)
+    .then(async () => {
+      const user = await auth.fetchUsersRole()
+      console.log(user, 'halo user')
+      if (user) {
+        router.push('/admin')
+      } else {
+        router.push('/blank')
+      }
+    })
+    .catch((error) => {
+      // Handle login error
+      console.log('Login failed. Please try again.')
+    })
 }
 
 onMounted(() => {

@@ -1,9 +1,9 @@
 <template style="min-height: 100vh">
-  <div v-if="getDashboardNews && getDashboardNews?.length > 0">
+  <div v-if="getDashboardUser && getDashboardUser?.length > 0">
     <div>
       <h1 class="separator">
         <span class="separator-line"></span>
-        <span class="separator-text">News</span>
+        <span class="separator-text">Top User</span>
         <span class="separator-line"></span>
       </h1>
     </div>
@@ -14,60 +14,46 @@
           sm="6"
           md="4"
           align="center"
-          v-for="news in getDashboardNews"
-          :key="news.id"
+          v-for="user in getDashboardUser"
+          :key="user.id"
         >
           <v-card>
             <v-card>
               <v-card-title class="v-card--title justify-center">
-                {{ news?.title }}
+                {{ user?.user_name }}
               </v-card-title>
               <div class="line-separator"></div>
               <!-- Add the line separator -->
               <!-- Add the v-divider component here -->
 
               <v-card-text class="v-card--title justify-center">
-                <div style="max-height: 250px" v-html="news?.content"></div>
+                <div style="max-height: 250px" v-html="user?.total_borrowings"></div>
               </v-card-text>
             </v-card>
-            <v-btn @click="handlePreview(news?.id)" outlined class="mb-5 mt-5 primary-button"
-              >More Details</v-btn
-            >
           </v-card>
         </v-col>
       </v-row>
     </div>
   </div>
   <div style="min-height: 100vh">
-    <div v-if="getDashboardQuiz">
+    <div v-if="getDashboardMonth">
       <h1 class="separator">
         <span class="separator-line"></span>
-        <span class="separator-text">Quiz</span>
+        <span class="separator-text">Total Booking This Month</span>
         <span class="separator-line"></span>
       </h1>
-    </div>
 
-    <div>
-      <v-row>
-        <v-col cols="12" sm="6" md="4" v-for="quiz in getDashboardQuiz" :key="quiz.id">
-          <v-card class="mx-auto" max-width="344">
-            <div class="d-flex align-center justify-center">
-              <v-card-title> {{ quiz.module_name.toUpperCase() }} </v-card-title>
-            </div>
-            <div class="d-flex align-center justify-center">
-              <v-card-subtitle class="subtitle-text"
-                ><b
-                  >Periode : {{ convertDateManualToIndo(quiz?.start_date) }}
-                  {{ convertDateManualToIndo(quiz.end_date) }}</b
-                >
-              </v-card-subtitle>
-            </div>
-            <v-card-actions class="d-flex justify-center">
-              <v-btn class="primary-button" @click="handleAnswer(quiz.id)">Take Test</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
+      <div>
+        <v-row>
+          <v-col cols="12" sm="6" md="4">
+            <v-card class="mx-auto" max-width="344">
+              <div class="d-flex align-center justify-center">
+                <v-card-title> {{ getDashboardMonth }} </v-card-title>
+              </div>
+            </v-card>
+          </v-col>
+        </v-row>
+      </div>
     </div>
   </div>
 </template>
@@ -83,29 +69,31 @@ const dashboardStore = useDashboardStore()
 const route = useRoute()
 const router = useRouter()
 
-const getDashboardNews = computed(() => dashboardStore.getDashboardNews())
+const getDashboardUser = computed(() => dashboardStore.getDashboardUser())
+const getDashboardMonth = computed(() => dashboardStore.getDashboardMonth())
+
 onMounted(() => {
-  dashboardStore.fetchDashboardNews()
+  dashboardStore.fetchDashboardUser('')
+  dashboardStore.fetchDashboardMonth('')
 })
+// const getDashboardQuiz = computed(() => dashboardStore.getDashboardQuiz())
+// onMounted(() => {
+//   dashboardStore.fetchDashboardQuiz()
+// })
 
-const getDashboardQuiz = computed(() => dashboardStore.getDashboardQuiz())
-onMounted(() => {
-  dashboardStore.fetchDashboardQuiz()
-})
+// const handlePreview = async (id) => {
+//   router.push(`/admin/news/preview/${id}`)
+// }
 
-const handlePreview = async (id) => {
-  router.push(`/admin/news/preview/${id}`)
-}
+// const handleAnswer = async (id) => {
+//   router.push(`/admin/quiz/answer/${id}`)
+// }
 
-const handleAnswer = async (id) => {
-  router.push(`/admin/quiz/answer/${id}`)
-}
+// const convertDateHandle = (date) => {
+//   return convertDate(date)
+// }
 
-const convertDateHandle = (date) => {
-  return convertDate(date)
-}
-
-const show = ref(false)
+// const show = ref(false)
 </script>
 
 <style scooped>

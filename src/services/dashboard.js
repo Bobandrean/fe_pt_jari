@@ -1,14 +1,14 @@
 import Api from '@/utils/api.js'
 
 class DashboardServices {
-    async getNewsDashboard() {
-        return await Api.doGet(`dashboard/news`)
+    async getUserDashboard() {
+        return await Api.doGet(`dashboard/user`)
             .then((res) => res)
             .catch((err) => err)
     }
 
-    async getQuizDashboard() {
-        return await Api.doGet(`dashboard/quiz`)
+    async getMonthDashboard() {
+        return await Api.doGet(`dashboard/month`)
             .then((res) => res)
             .catch((err) => err)
     }

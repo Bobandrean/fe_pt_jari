@@ -6,45 +6,44 @@ import {
     defineStore
 } from 'pinia'
 import SERVICE from "@/services/dashboard.js"
-import Swal from 'sweetalert2'
 
 export const useDashboardStore = defineStore('dashboard', () => {
-    const dashboardnews = ref([]);
-    const dashboardquiz = ref([]);
+    const dashboarduser = ref([]);
+    const dashboardmonth = ref([]);
 
-    const getDashboardNews = () => {
-        return dashboardnews.value;
+    const getDashboardUser = () => {
+        return dashboarduser.value;
     };
 
-    const setDashboardNews = (value) => {
-        dashboardnews.value = value
+    const setDashboardUser = (value) => {
+        dashboarduser.value = value
     }
 
-    const getDashboardQuiz = () => {
-        return dashboardquiz.value;
+    const getDashboardMonth = () => {
+        return dashboardmonth.value;
     };
 
-    const setDashboardQuiz = (value) => {
-        dashboardquiz.value = value
+    const setDashboardMonth = (value) => {
+        dashboardmonth.value = value
     }
 
-    const fetchDashboardNews = async () => {
+    const fetchDashboardUser = async () => {
         try {
 
-            const res = await SERVICE.getNewsDashboard();
+            const res = await SERVICE.getUserDashboard();
 
-            setDashboardNews(res.data)
+            setDashboardUser(res.data)
 
         } catch (error) {
             console.error(error)
         }
     };
 
-    const fetchDashboardQuiz = async () => {
+    const fetchDashboardMonth = async () => {
         try {
-            const res = await SERVICE.getQuizDashboard();
+            const res = await SERVICE.getMonthDashboard();
 
-            setDashboardQuiz(res.data)
+            setDashboardMonth(res.data)
 
         } catch (error) {
             console.error(error)
@@ -52,11 +51,11 @@ export const useDashboardStore = defineStore('dashboard', () => {
     }
 
     return {
-        dashboardnews,
-        getDashboardNews,
-        fetchDashboardNews,
-        dashboardquiz,
-        getDashboardQuiz,
-        fetchDashboardQuiz
+        dashboarduser,
+        getDashboardUser,
+        fetchDashboardUser,
+        dashboardmonth,
+        fetchDashboardMonth,
+        getDashboardMonth
     }
 })

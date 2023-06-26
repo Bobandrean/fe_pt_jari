@@ -51,7 +51,7 @@ export const useAuthStore = defineStore('auth', () => {
         try {
 
             const res = await SERVICE.getUsers()
-            const position = res.data.position;
+            const position = res.data;
 
             setUsers(res.data)
 
